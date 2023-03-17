@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Author Show</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <header>
+        <div class="container mt-5 text-end">
+            <a href="/">Home</a>
+        </div>
+    </header>
+    <main>
+        <div class="container mt-5 d-flex gap-5">
+            <div class="left col-6">
+                <p class="h1">{{author.name}}'s favorites</p>
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col"># of pages</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for favorite in author.favorites %}
+                            <tr class="">
+                                <td>{{favorite.title}}</td>
+                                <td>{{favorite.num_of_pages}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="right col-6">
+                <p class="h1">Add Author's Favorite</p>
+                <form action="/authors/favorite" method="post">
+                    <div class="mb-3">
+                        <label for="" class="form-label">Book:</label>
+                        <select class="form-select form-select-lg" name="book_id">
+                            <option selected>Select one</option>
+                            {% for book in books: %}
+                            <option value="{{book.id}}">{{book.title}}</option>
+                            {% endfor %}
+                            <input type="hidden" name="user_id" value="{{author.id}}">
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-dark">Add</button>
+                </form>
+            </div>
+        </div>
+
+    </main>
+    <footer>
+        <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>
