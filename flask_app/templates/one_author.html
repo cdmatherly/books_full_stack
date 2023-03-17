@@ -49,7 +49,7 @@
                         <label for="" class="form-label">Book:</label>
                         <select class="form-select form-select-lg" name="book_id">
                             <option selected>Select one</option>
-                            {% for book in books: %}
+                            {% for book in books%}
                             <option value="{{book.id}}">{{book.title}}</option>
                             {% endfor %}
                             <input type="hidden" name="user_id" value="{{author.id}}">

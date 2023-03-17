@@ -16,12 +16,15 @@ def create_author():
 @app.route('/authors/<int:author_id>')
 def one_author(author_id):
     user = User.get_author_with_books(author_id)
-    books = Book.get_all()
-    # print(f"ALL BOOKS >>>>> {books}")
+    all_books = Book.get_all()
+    # print(f"\nALL BOOKS >>>>> {all_books}")
+    books =User.filter_favorites(user, all_books)
+    # print(f"\nNEW BOOKS >>>>> {books}")
+    # print(f"\nALL USERS >>>>> {user.favorites}")
     return render_template('one_author.html', author = user, books=books)
 
 @app.route('/authors/favorite', methods=['POST'])
 def favorite_author():
     User.add_favorite(request.form)
-    print(f"REQUEST FORM !!!!!!!!!!!!!!!!!!!!! {request.form}")
+    # print(f"REQUEST FORM !!!!!!!!!!!!!!!!!!!!! {request.form}")
     return redirect(f"/authors/{request.form['user_id']}")

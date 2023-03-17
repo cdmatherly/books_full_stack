@@ -20,11 +20,12 @@ def create_book():
 @app.route('/books/<int:book_id>')
 def one_book(book_id):
     book = Book.get_book_with_authors(book_id)
-    users = User.get_all()
-    return render_template('one_book.html', authors = users, book = book)
+    all_authors = User.get_all()
+    authors = Book.filter_favorites(book, all_authors)
+    return render_template('one_book.html', authors = authors, book = book)
 
 @app.route('/books/favorite', methods=['POST'])
 def favorite_book():
     Book.add_favorite(request.form)
-    print(f"REQUEST FORM !!!!!!!!!!!!!!!!!!!!! {request.form}")
+    # print(f"REQUEST FORM !!!!!!!!!!!!!!!!!!!!! {request.form}")
     return redirect(f"/books/{request.form['book_id']}")

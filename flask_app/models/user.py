@@ -43,7 +43,7 @@ class User:
                 'updated_at': row['updated_at']
             }
             author.favorites.append(book.Book(book_data))
-            print(author.favorites[0].title, ",", author.name)
+            # print(author.favorites[0].title, ",", author.name)
         return author
     
     @classmethod
@@ -51,3 +51,21 @@ class User:
         query = """INSERT INTO favorites (book_id, user_id) VALUES ( %(book_id)s, %(user_id)s );"""
         results = connectToMySQL(cls.DB).query_db(query, data)
         return results
+    
+    @classmethod
+    def filter_favorites(cls, author, books):
+        for favorite in author.favorites:
+            # print(f'\n~~~~~~~~~~~~~~~~~ NEW OUTER LOOP ~~~~~~~~~~~~~~~~')
+            for i in range(len(books)):
+                # print(f"\n -----------------NEW INNER LOOP {i+1} -------------------")
+                # print(f"\nFAVORITES>>>>>>!!!!! {favorite.title} ID: {favorite.id}")
+                # print(f"\n{range(len(books))}, {books}")
+                # print(f"\nBOOK[{i}]: {books[i].title} ID: {books[i].id}")
+                if books[i].id == favorite.id:
+                    # print(f"\n{i}. WHAT AM I???????????? >> {books[i].title} ID: {books[i].id}")
+                    books.pop(i)
+                    # print(f"\nPOP")
+                    break
+                    # del books[i]
+        # print(f"\nTHESE ARE THE FILTERED BOOKS >>>>>> {books}")
+        return books
