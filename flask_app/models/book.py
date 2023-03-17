@@ -1,5 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask_app.models import user,favorite
+from flask_app.models import user
 
 class Book:
     DB = 'books_schema'
@@ -44,7 +44,7 @@ class Book:
                 'updated_at': row['updated_at']
             }
             book.favorites.append(user.User(author_data))
-            print(book.favorites[0].name)
+            print(book)
         return book
     
     @classmethod

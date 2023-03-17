@@ -1,5 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask_app.models import book,favorite
+from flask_app.models import book
 
 class User:
     DB = 'books_schema'
